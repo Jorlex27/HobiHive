@@ -1,25 +1,28 @@
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { User } = require('../models');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 
 const localAuthStrategy = new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  async (email, password, done) => {
+  usernameField: 'identifier',
+  passwordField: 'password'
+},
+  async (identifier, password, done) => {
     try {
-        
-      const user = await User.findOne({ where: { email: email } });
+      const user = await User.findOne({
+        where: {
+          [Op.or]: [{ email: identifier }, { username: identifier }]
+        }
+      });
       if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
+        return done(null, false, { message: 'Incorrect email or username.' });
       }
-      
+
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) {
         return done(null, false, { message: 'Incorrect password.' });
       }
-      
+
       return done(null, user);
     } catch (error) {
       return done(error);

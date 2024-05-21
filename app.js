@@ -3,7 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const routers = require('./routes');
 const flash = require('connect-flash');
-require('./config/passport-setup');
+require('./middlewares/passport-setup');
 const app = express();
 
 app.use(express.static('public'));

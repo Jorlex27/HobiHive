@@ -11,6 +11,8 @@ router.post('/', passport.authenticate('local', {
     failureFlash: true
 }));
 
+router.get('/sigup', LoginController.RenderSigup);
+router.post('/sigup', LoginController.HandlerSigup);
 router.get('/logout', LoginController.Logout);
 
 

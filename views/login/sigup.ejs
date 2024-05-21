@@ -1,0 +1,23 @@
+<%- include('../partial/head_login.ejs', {title : 'Sigup'}) %>
+
+    <div class="login-box signup-box">
+        <h2>Sign Up</h2>
+        <form action="/login/sigup" method="post">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Nama lengkap">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary signup-btn d-block w-100">Sign Up</button>
+        </form>
+        <hr>
+        <p class="text-center">Already have an account? <a href="login/" class="login-link">Login</a></p>
+    </div>
+</div>

@@ -1,4 +1,3 @@
-const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { User } = require('../models');
 require('dotenv').config()
@@ -17,11 +16,10 @@ const googleAuthStrategy = new GoogleStrategy({
                     username: profile.displayName,
                     email: profile.emails[0].value,
                     nama_lengkap: profile.displayName,
-                    role: 'user',
-                    password: '123456'
+                    role: 'user'
                 });
             }
-            
+
             return done(null, user);
         } catch (error) {
             return done(error, null);

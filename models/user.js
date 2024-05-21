@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     nama_lengkap: {
       type: DataTypes.STRING,
@@ -66,14 +66,14 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Users',
     timestamps: true
   });
-  User.beforeCreate(async (user) => {
-    try {
-      const saltRounds = bcrypt.genSaltSync(10);
-      const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-      user.password = hashedPassword;
-    } catch (error) {
-      throw new Error('Error hashing password');
-    }
-  })
+  // User.beforeCreate(async (user) => {
+  //   try {
+  //     const saltRounds = bcrypt.genSaltSync(10);
+  //     const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+  //     user.password = hashedPassword;
+  //   } catch (error) {
+  //     throw new Error('Error hashing password');
+  //   }
+  // })
   return User;
 };
