@@ -1,0 +1,61 @@
+<%- include('../partial/head_login.ejs') %>
+<body>
+  <div class="container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary login-btn d-block w-100">Login</button>
+      </form>
+      <p class="text-center mt-3">or</p>
+      <a href="/auth/google" class="btn btn-danger google-btn d-block w-100">Login with Google</a>
+      <hr>
+      <p class="text-center">Don't have an account? <a href="#" class="signup-link">Sign Up</a></p>
+    </div>
+    <div class="login-box signup-box" style="display: none;">
+      <h2>Sign Up</h2>
+      <form action="/login/sigup" method="post">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="fullname" name="name" placeholder="Full Name">
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary signup-btn d-block w-100">Sign Up</button>
+      </form>
+      <hr>
+      <p class="text-center">Already have an account? <a href="#" class="login-link">Login</a></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginBox = document.querySelector('.login-box');
+      const signupBox = document.querySelector('.signup-box');
+      const signupLink = document.querySelector('.signup-link');
+      const loginLink = document.querySelector('.login-link');
+
+      signupLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        loginBox.style.display = 'none';
+        signupBox.style.display = 'block';
+      });
+
+      loginLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        loginBox.style.display = 'block';
+        signupBox.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
