@@ -56,8 +56,15 @@ module.exports = {
   loginUser
 };
 
+```
 
-##### Api Community
+### 2. Community Service (communityService.js)
+#### Fungsi:
+- Mengelola operasi terkait komunitas seperti pembuatan komunitas, pengambilan data komunitas, dan pembaruan informasi komunitas.
+
+#### Api:
+
+```js
 
 const Community = require('../models/community'); // Model Community
 
@@ -83,10 +90,14 @@ module.exports = {
   createCommunity,
   getAllCommunities
 };
+```
 
+### 3. Post Service (postService.js)
+#### Fungsi:
+- Mengelola operasi terkait postingan seperti pembuatan postingan, pengambilan postingan, dan penghapusan postingan.
 
-##### Api Post
-
+#### Api:
+```js
 const Post = require('../models/post'); // Model Post
 
 // Fungsi untuk membuat postingan baru
@@ -112,11 +123,14 @@ module.exports = {
   createPost,
   getPostsByCommunity
 };
+```
 
+### 4. Comment Service (commentService.js)
+#### Fungsi:
+- Mengelola operasi terkait komentar seperti pembuatan komentar, pengambilan komentar, dan penghapusan komentar.
 
-
-##### Api Comment
-
+#### API:
+```js
 const Comment = require('../models/comment'); // Model Comment
 
 // Fungsi untuk membuat komentar baru
@@ -141,10 +155,21 @@ module.exports = {
   createComment,
   getCommentsByPost
 };
+```
 
 
-######## contoh di controller
+### Manfaat Memisahkan Logika Bisnis di Services
 
+- Modularitas: Memisahkan logika bisnis membuat kode lebih modular dan terorganisir, memudahkan pemeliharaan dan pengembangan.
+- Pengujian: Dengan memisahkan logika bisnis, kita dapat menulis unit test untuk fungsi-fungsi ini secara   terpisah dari kontroler dan rute.
+- Keterbacaan: Memisahkan logika bisnis dari kontroler membuat kode lebih mudah dibaca dan dimengerti.
+
+Penggunaan Service di Controller
+
+Di dalam kontroler, kita dapat mengimpor service yang sesuai dan menggunakan fungsi-fungsi yang ada di service tersebut untuk menangani permintaan yang datang.
+Contoh di userController.js:
+
+```js
 const { registerUser, loginUser } = require('../services/userService');
 
 // Handler untuk registrasi
@@ -173,6 +198,6 @@ module.exports = {
   register,
   login
 };
-
+```
 
 Dokumentasi ini memberikan penjelasan tentang tujuan dan penggunaan dari setiap service dalam proyek Anda. Ini akan membantu pengembang lain yang mungkin bekerja dengan Anda untuk memahami struktur dan logika bisnis dari aplikasi yang Anda bangun.
