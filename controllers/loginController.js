@@ -8,7 +8,6 @@ class LoginController {
                 return res.redirect('/');
             }
             const errorMessage = req.flash('error')[0];
-            console.log(req.flash('error'));
             res.render('login/index', { errorMessage })
         } catch (error) {
             res.send(error)
@@ -17,13 +16,15 @@ class LoginController {
 
     static async RenderSigup(req, res) {
         try {
-            res.render('login/sigup')
+            const messages = req.flash('error');
+            console.log(messages);
+            res.render('login/signup', { messages });
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async HandlerSigup(req, res) {
+    static async HandlerSignup(req, res) {
         try {
             if (req.isAuthenticated()) {
                 return res.redirect('/');
@@ -32,12 +33,14 @@ class LoginController {
             const { nama_lengkap, username, email, password } = req.body;
 
             if (!nama_lengkap || !username || !email || !password) {
-                return res.status(400).send('Mohon lengkapi semua bidang');
+                req.flash('error', 'Mohon lengkapi semua bidang')
+                return res.redirect('/login/signup')
             }
 
             const user = await User.findOne({ where: { email } });
             if (user) {
-                return res.status(400).send('Email sudah terdaftar');
+                req.flash('error', 'Email sudah terdaftar');
+                return res.redirect('/login/signup');
             }
 
             const saltRounds = bcrypt.genSaltSync(10);
@@ -47,7 +50,8 @@ class LoginController {
             await User.create({ nama_lengkap, username, email, password: newPassword, role: 'user' });
             res.redirect('/login');
         } catch (error) {
-            res.send(error)
+            req.flash('error', 'Terjadi kesalahan saat mendaftar');
+            res.redirect('/login/signup');
         }
     }
 

@@ -1,0 +1,51 @@
+<%- include('../partial/head_login.ejs', {title : 'Sigup' }) %>
+
+    <div class="login-box signup-box">
+        <h2>Sign Up</h2>
+        <form action="/login/signup" method="post">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
+                    placeholder="Nama lengkap">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary signup-btn d-block w-100">Sign Up</button>
+        </form>
+        <hr>
+        <p class="text-center">Already have an account? <a href="login/" class="login-link">Login</a></p>
+    </div>
+    </div>
+
+    <% if (messages.length> 0){
+        messages.forEach(m => { %>
+        <script>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.error('<%= m %>');
+            });
+        </script>
+        <%})} %>
