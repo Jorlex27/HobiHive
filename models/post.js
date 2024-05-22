@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {msg: 'Content tidak boleh kosong'},
         notNull: {msg: 'Content tidak boleh kosong'}
       }
+    },
+    imageURL: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,

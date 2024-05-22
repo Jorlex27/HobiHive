@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: true
     },
-    gambar_profile: {
+    imageURL: {
       type: DataTypes.STRING,
       allowNull: true
     },

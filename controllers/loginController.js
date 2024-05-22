@@ -3,9 +3,6 @@ const { User, UserProfile, sequelize } = require('../models')
 class LoginController {
     static async Login(req, res) {
         try {
-            if (req.isAuthenticated()) {
-                return res.redirect('/');
-            }
             const msg = req.flash('success');
             const err = req.flash('error')[0];
             res.render('login/index', { msg, err })
@@ -27,10 +24,6 @@ class LoginController {
     static async HandlerSignup(req, res) {
         const transaction = await sequelize.transaction();
         try {
-            if (req.isAuthenticated()) {
-                return res.redirect('/');
-            }
-
             const { nama_lengkap, username, email, password } = req.body;
 
             if (!nama_lengkap || !username || !email || !password) {
