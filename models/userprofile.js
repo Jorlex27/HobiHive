@@ -17,16 +17,28 @@ module.exports = (sequelize, DataTypes) => {
     UserId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        notEmpty: {msg: 'User Id tidak boleh kosong'},
+        notNull: {msg: 'User Id tidak boleh kosong'}
+      }
     },
     nama_lengkap: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: 'Nama Lengkap tidak boleh kosong'},
+        notNull: {msg: 'Nama Lengkap tidak boleh kosong'}
+      }
     },
     tangal_lahir: {
       type: DataTypes.DATE,
       allowNull: true
     },
     gambar_profile: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    bio: {
       type: DataTypes.STRING,
       allowNull: true
     }

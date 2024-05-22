@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasOne(models.UserProfile)
+      User.hasMany(models.CommunityMember)
+      User.hasMany(models.Post)
+      User.hasMany(models.Comment)
+      User.hasMany(models.Like)
     }
   }
   User.init({

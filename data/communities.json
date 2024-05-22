@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Technology Enthusiasts",
+        "description": "A community for people passionate about the latest in technology.",
+        "imageURL": "http://example.com/tech.jpg"
+    },
+    {
+        "name": "Book Lovers",
+        "description": "A place for book lovers to discuss and share their favorite reads.",
+        "imageURL": "http://example.com/books.jpg"
+    },
+    {
+        "name": "Fitness Freaks",
+        "description": "Join us to share tips and motivation for staying fit and healthy.",
+        "imageURL": "http://example.com/fitness.jpg"
+    },
+    {
+        "name": "Travel Buffs",
+        "description": "A community for travel enthusiasts to share experiences and tips.",
+        "imageURL": "http://example.com/travel.jpg"
+    },
+    {
+        "name": "Cooking Masters",
+        "description": "A place for those who love cooking and sharing recipes.",
+        "imageURL": "http://example.com/cooking.jpg"
+    }
+]

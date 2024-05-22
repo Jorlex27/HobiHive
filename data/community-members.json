@@ -1,0 +1,38 @@
+[
+    {
+        "UserId": 4,
+        "CommunityId": 1
+    },
+    {
+        "UserId": 4,
+        "CommunityId": 2
+    },
+    {
+        "UserId": 5,
+        "CommunityId": 3
+    },
+    {
+        "UserId": 5,
+        "CommunityId": 4
+    },
+    {
+        "UserId": 7,
+        "CommunityId": 1
+    },
+    {
+        "UserId": 7,
+        "CommunityId": 5
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 2
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 3
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 4
+    }
+]
