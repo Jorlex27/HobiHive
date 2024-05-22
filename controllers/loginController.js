@@ -1,5 +1,4 @@
-const { User } = require('../models')
-const bcrypt = require('bcryptjs');
+const { User, UserProfile, sequelize } = require('../models')
 
 class LoginController {
     static async Login(req, res) {
@@ -7,8 +6,9 @@ class LoginController {
             if (req.isAuthenticated()) {
                 return res.redirect('/');
             }
-            const errorMessage = req.flash('error')[0];
-            res.render('login/index', { errorMessage })
+            const msg = req.flash('success');
+            const err = req.flash('error')[0];
+            res.render('login/index', { msg, err })
         } catch (error) {
             res.send(error)
         }
@@ -25,11 +25,12 @@ class LoginController {
     }
 
     static async HandlerSignup(req, res) {
+        const transaction = await sequelize.transaction();
         try {
             if (req.isAuthenticated()) {
                 return res.redirect('/');
             }
-            console.log('masuk');
+
             const { nama_lengkap, username, email, password } = req.body;
 
             if (!nama_lengkap || !username || !email || !password) {
@@ -43,13 +44,19 @@ class LoginController {
                 return res.redirect('/login/signup');
             }
 
-            const saltRounds = bcrypt.genSaltSync(10);
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
-            const newPassword = hashedPassword;
+            const userCreate = await User.create({ username, email, password, role: 'user' }, { transaction });
 
-            await User.create({ nama_lengkap, username, email, password: newPassword, role: 'user' });
+            await UserProfile.create({
+                UserId: userCreate.id,
+                nama_lengkap: nama_lengkap
+            }, { transaction });
+
+            await transaction.commit()
+            req.flash('success', 'Pendaftaran berhasil. Silakan login.');
             res.redirect('/login');
         } catch (error) {
+            await transaction.rollback()
+            console.error(error);
             req.flash('error', 'Terjadi kesalahan saat mendaftar');
             res.redirect('/login/signup');
         }

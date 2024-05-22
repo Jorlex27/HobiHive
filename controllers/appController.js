@@ -5,7 +5,6 @@ class AppController {
         try {
             const userId = req.user.id;
             const data = await User.findByPk(userId)
-            console.log(data);
             res.render('index', {data})
         } catch (error) {
             res.send(error)

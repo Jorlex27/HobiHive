@@ -20,7 +20,6 @@
 
 <%- include('../partial/_linkScript.ejs') %>
 
-    <% if(errorMessage){ %>
       <script>
         $(document).ready(function () {
           toastr.options = {
@@ -40,11 +39,18 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
           };
-
-          toastr.error('<%= errorMessage %>');
         });
       </script>
+    <% if(err){ %>
+      <script>
+        toastr.error('<%= err %>');
+      </script>
       <%} %>
+      <% if (msg) { %>
+       <script>
+        toastr.success('<%= msg %>');
+       </script>
+      <% } %>
   </body>
 
   </html>

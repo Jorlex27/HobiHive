@@ -2,41 +2,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('UserProfiles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: true
+      UserId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: 'Users',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       nama_lengkap: {
-        type: Sequelize.STRING
-      },
-      tanggal_lahir: {
-        type: Sequelize.DATE
-      },
-      role: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      bio: {
-        type: Sequelize.TEXT
+      tangal_lahir: {
+        type: Sequelize.DATE,
+        allowNull: true
       },
-      lokasi: {
-        type: Sequelize.STRING
-      },
-      gambar_profil: {
-        type: Sequelize.STRING
+      gambar_profile: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('UserProfiles');
   }
 };

@@ -1,0 +1,201 @@
+
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #6F4E37;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 9999;
+    transition: background-color 0.3s ease;
+}
+
+.chat-button:hover {
+    background-color: #A67B5B;
+}
+
+/* Jendela Percakapan */
+.chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: #6F4E37;
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.chat-footer {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.chat-footer input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-footer button {
+    background-color: #6F4E37;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chat-footer button:hover {
+    background-color: #A67B5B;
+}
+
+.chat {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin: 5px 0;
+    position: relative;
+    max-width: 80%;
+}
+
+.chat-left {
+    align-self: flex-start;
+    background-color: #ffffff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+.chat-right {
+    position: absolute;
+    right: 3px;
+    align-self: flex-end;
+    background-color: #dcf8c6;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+.chat-input {
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+    width: 100%;
+    color: inherit;
+}
+
+.chat-input-left {
+    text-align: left;
+}
+
+.chat-input-right {
+    text-align: right;
+}
+
+.chat-input:focus {
+    outline: none;
+}
+
+.chat small {
+    color: #999;
+    font-size: 12px;
+    margin-left: 10px;
+    align-self: flex-end;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-right .dropdown-content {
+    right: 0;
+}
+
+.material-icons {
+    font-size: 20px;
+    color: #999;
+}

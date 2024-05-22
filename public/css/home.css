@@ -1,0 +1,137 @@
+body {
+    background-color: #fafafa;
+    margin-top: 56px;
+    box-sizing: border-box;
+}
+
+.navbar-brand {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+}
+
+.nav-link .material-icons {
+    vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+.nav-link:hover {
+    color: #6F4E37;
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    background-color: #ffffff;
+}
+
+.card-body .material-icons {
+    cursor: pointer;
+    color: #333;
+}
+
+.card-body .material-icons:hover {
+    color: #6F4E37;
+}
+
+.card-body p {
+    color: #333;
+}
+
+.list-group-item.active {
+    background-color: #6F4E37;
+    border-color: #6F4E37;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover:not(.list-group-item.active) {
+    background-color: #FED8B1;
+}
+
+.list-group-item .material-icons {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .list-group-item {
+    display: flex;
+    align-items: center;
+}
+
+.card .list-group-item:hover {
+    background-color: #FED8B1;
+}
+
+input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin-top: 1rem;
+}
+
+input[type="text"]:focus {
+    box-shadow: none;
+    border: 1px solid #6F4E37;
+}
+
+.search-icon {
+    position: relative;
+}
+
+.search-input {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+}
+
+.search-icon:hover .search-input {
+    width: 200px;
+    padding: 0 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input input {
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    transition: width 0.3s ease-in-out;
+}
+
+.search-input button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.search-input input:focus {
+    outline: none;
+}
+
+.search-input input::placeholder {
+    color: #999;
+}
+
+.search-input button:hover {
+    color: #6F4E37;
+}
