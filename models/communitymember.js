@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg: 'Community Id gaboleh kosong'}
       }
     },
-    role: DataTypes.ENUM
+    role: DataTypes.ENUM('admin','user')
   }, {
     sequelize,
     modelName: 'CommunityMember',

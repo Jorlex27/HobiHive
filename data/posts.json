@@ -1,0 +1,56 @@
+[
+    {
+        "UserId": 4,
+        "CommunityId": 1,
+        "title": "The Future of AI",
+        "content": "Artificial Intelligence is rapidly evolving and changing the landscape of technology."
+    },
+    {
+        "UserId": 4,
+        "CommunityId": 2,
+        "title": "Favorite Books of 2024",
+        "content": "Here are some of the best books I've read this year..."
+    },
+    {
+        "UserId": 5,
+        "CommunityId": 3,
+        "title": "Workout Routines for Beginners",
+        "content": "Starting a new fitness journey? Here are some routines to get you started..."
+    },
+    {
+        "UserId": 5,
+        "CommunityId": 4,
+        "title": "Top Travel Destinations",
+        "content": "Planning your next trip? Check out these amazing travel destinations..."
+    },
+    {
+        "UserId": 7,
+        "CommunityId": 1,
+        "title": "Tech Innovations in 2024",
+        "content": "This year has seen some incredible tech innovations..."
+    },
+    {
+        "UserId": 7,
+        "CommunityId": 5,
+        "title": "Cooking Tips and Tricks",
+        "content": "Want to improve your cooking skills? Here are some tips and tricks..."
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 2,
+        "title": "Book Recommendations",
+        "content": "Looking for a good read? Here are some book recommendations..."
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 3,
+        "title": "Healthy Living Tips",
+        "content": "Simple and effective tips for a healthier lifestyle..."
+    },
+    {
+        "UserId": 9,
+        "CommunityId": 4,
+        "title": "Travel on a Budget",
+        "content": "Explore the world without breaking the bank with these budget travel tips..."
+    }
+]
