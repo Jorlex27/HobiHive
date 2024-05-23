@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { User, UserProfile, Post, Community, CommunityMember, ChatMessage } = require("../models");
+const { User, UserProfile, Post, Community, CommunityMember, ChatMessage, Like, Comment } = require("../models");
 
 async function getCommonityId(userId) {
     const communityMemberships = await CommunityMember.findAll({
@@ -31,7 +31,13 @@ async function getPostMembers(userId, search) {
                         [Op.in]: communityIds
                     }
                 },
-                attributes: []
+                attributes: ['name']
+            },
+            {
+                model: Like
+            },
+            {
+                model: Comment
             }
         ],
         attributes: ['id', 'title', 'content', 'UserId', 'CommunityId']

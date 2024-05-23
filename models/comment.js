@@ -31,7 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg : 'Post Id ga boleh kosong'}
       }
     },
-    content: DataTypes.TEXT
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: {msg : 'content Id ga boleh kosong'},
+        notNull: {msg : 'content Id ga boleh kosong'}
+      }
+    }
   }, {
     sequelize,
     modelName: 'Comment',

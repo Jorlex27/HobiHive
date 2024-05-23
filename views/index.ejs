@@ -1,4 +1,71 @@
 <%- include('partial/headHome.ejs') %>
+
+    <style>
+        #commentsContainer {
+            margin-top: 20px;
+            max-height: 70px;
+            overflow: auto;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .comment .author {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .comment .content {
+            color: #333;
+            font-size: 12px;
+        }
+
+        .container-input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .comment-input {
+            width: 100%;
+        }
+
+        .comment-input input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 420px;
+        }
+
+        .comment-input input[type="text"]:focus {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .comment-input button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        .comment-input button:hover {
+            background-color: #45a049;
+        }
+    </style>
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 d-none d-md-block">
@@ -42,9 +109,13 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-3">
                                         <div>
-                                            <i class="material-icons">favorite_border</i>
-                                            <i class="material-icons">chat_bubble_outline</i>
-                                            <i class="material-icons">send</i>
+                                            <a onclick="likeClicked('<%= p.id %>', '<%= p.User.id %>')">
+                                                <i class="bi bi-heart"></i>
+                                                <%= p.Likes.length %>
+                                                    <a>
+                                                        <i class="bi bi-chat"></i>
+                                                        <%= p.Comments.length %>
+                                                    </a>
                                         </div>
                                         <i class="material-icons">bookmark_border</i>
                                     </div>
@@ -53,7 +124,26 @@
                                         </strong>
                                         <%= p.content %>
                                     </p>
-                                    <input type="text" class="form-control" placeholder="Tambah komentar...">
+                                    <div class="container-input">
+                                        <form id="commentForm" action="/comment/<%= p.id %>/<%= p.User.id %>" method="post">
+                                            <div class="comment-input">
+                                                <input type="text" placeholder="Masukkan teks..." name="content">
+                                                <button type="submit"><i class="bi bi-arrow-right"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="commentsContainer" style="display:block;">
+                                        <% p.Comments.forEach(c=> { %>
+                                            <div class="comment">
+                                                <div class="author">
+                                                    <%= p.User.UserProfile.nama_lengkap %>
+                                                </div>
+                                                <div class="content">
+                                                    <%= c.content %>
+                                                </div>
+                                            </div>
+                                            <% }) %>
+                                    </div>
                                 </div>
                 </div>
                 <% }) %>
@@ -158,12 +248,16 @@
             const socket = io()
             const chatWindow = document.getElementById('chatWindow');
             const chatContainer = document.getElementById('chat-container');
+            const closeChat = document.getElementById('closeChat');
+
             const handleClick = async (name) => {
                 socket.emit('joinRoom', name);
 
                 const nameUser = document.getElementById('name-user')
                 nameUser.textContent = name;
                 chatWindow.style.display = 'block';
+
+                closeChat.setAttribute('data-name', name);
 
                 const chatForm = document.getElementById('chat-form');
                 const sendButton = document.getElementById('sendButton')
@@ -223,11 +317,29 @@
                 })
             }
 
-            const closeChat = document.getElementById('closeChat');
             closeChat.addEventListener('click', () => {
+                const room = closeChat.dataset.name
                 chatWindow.style.display = 'none';
-                // socket.emit('leaveRoom', room);
+                socket.emit('leaveRoom', room);
             })
+
+            // Like
+            async function likeClicked(postId, userId) {
+                event.preventDefault();
+
+                try {
+                    const response = await fetch(`/like/${postId}/${userId}`, {
+                        method: 'GET'
+                    });
+
+                    const data = await response.json();
+
+                    console.log('Respons:', data);
+                } catch (error) {
+                    console.error('uy:', error);
+                }
+            }
+
         </script>
 
         <% if (msg) { %>

@@ -27,7 +27,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {msg: 'Nama Lengkap tidak boleh kosong'},
-        notNull: {msg: 'Nama Lengkap tidak boleh kosong'}
+        notNull: {msg: 'Nama Lengkap tidak boleh kosong'},
+        len: {
+          args: [5],
+          msg: 'Nama lengkap harus memiliki setidaknya 5 karakter'
+        }
       }
     },
     tangal_lahir: {

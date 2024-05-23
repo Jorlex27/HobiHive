@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: 'Username sudah digunakan'
+      },
       validate: {
         notEmpty: { msg: 'Username ga boleh kosong' },
         notNull: { msg: 'Username ga boleh kosong' }
@@ -28,9 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: 'Email sudah digunakan'
+      },
       validate: {
         notEmpty: { msg: 'Email ga boleh kosong' },
-        notNull: { msg: 'Email ga boleh kosong' }
+        notNull: { msg: 'Email ga boleh kosong' },
+        isEmail: { msg: 'Email harus valid' }
       }
     },
     password: {

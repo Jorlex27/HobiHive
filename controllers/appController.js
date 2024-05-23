@@ -153,6 +153,40 @@ class AppController {
             }
         }
     }
+
+    static async AddPostLikes(req, res) {
+        try {
+            const { postId, userId } = req.params
+            await Like.findOrCreate({
+                where: {
+                    PostId: postId,
+                    UserId: userId
+                },
+                default: {
+                    PostId: postId,
+                    UserId: userId
+                }
+            })
+            res.status(200)
+        } catch (error) {
+            res.status(500).json('arapah')
+        }
+    }
+
+    static async AddPostComment(req, res) {
+        try {
+            const { postId, userId } = req.params
+            const { content } = req.body
+            await Comment.create({
+                PostId: postId,
+                UserId: userId,
+                content
+            })
+            res.redirect('/')
+        } catch (error) {
+            res.send(error)
+        }
+    }
 }
 
 module.exports = AppController
