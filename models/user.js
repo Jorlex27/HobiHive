@@ -4,27 +4,34 @@ const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
+
     static associate(models) {
       User.hasOne(models.UserProfile)
       User.hasMany(models.CommunityMember)
+      User.belongsToMany(models.Community, { through: models.CommunityMember });
       User.hasMany(models.Post)
       User.hasMany(models.Comment)
       User.hasMany(models.Like)
+      User.hasMany(models.ChatMessage);
     }
   }
   User.init({
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: 'Username ga boleh kosong' },
+        notNull: { msg: 'Username ga boleh kosong' }
+      }
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: 'Email ga boleh kosong' },
+        notNull: { msg: 'Email ga boleh kosong' }
+      }
     },
     password: {
       type: DataTypes.STRING,
@@ -41,6 +48,13 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.beforeCreate(async (user) => {
     if (user.password) {
+      const saltRounds = bcrypt.genSaltSync(10);
+      const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+      user.password = hashedPassword;
+    }
+  })
+  User.beforeUpdate(async (user) => {
+    if (user.changed('password')) {
       const saltRounds = bcrypt.genSaltSync(10);
       const hashedPassword = await bcrypt.hash(user.password, saltRounds);
       user.password = hashedPassword;

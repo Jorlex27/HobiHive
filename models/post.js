@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Post.belongsTo(models.User)
       Post.belongsTo(models.Community)
+      Post.hasMany(models.Like)
+      Post.hasMany(models.Comment)
     }
   }
   Post.init({
@@ -21,7 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     CommunityId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: 'Community tidak boleh kosong'},
+        notNull: {msg: 'Community tidak boleh kosong'}
+      }
     },
     title: {
       type: DataTypes.STRING,

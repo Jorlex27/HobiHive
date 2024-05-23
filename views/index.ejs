@@ -5,154 +5,238 @@
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action active"><i
                         class="material-icons">sports_esports</i> Your hobby</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="material-icons">chat</i> Chat</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="material-icons">people</i> Yang
-                    Aktif</a>
+                <% hobbi.forEach(h=> { %>
+                    <div href="#" class="list-group-item list-group-item-action"
+                        onclick="handleClick('<%= h.Community.name %>')">
+                        <%= h.Community.name %>
+                    </div>
+                    <% }) %>
             </div>
             <div class="list-group mt-3">
                 <a href="#" class="list-group-item list-group-item-action active"><i
                         class="material-icons">sports_esports</i> Join a new hobby</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="material-icons">chat</i> Chat</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="material-icons">people</i> Yang
-                    Aktif</a>
+                <% allHobbi.forEach(h=> { %>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <%= h.Community.name %>
+                    </a>
+                    <% }) %>
             </div>
         </div>
         <!-- Main Content -->
         <div class="col-md-6">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Pengguna 1</h5>
-                </div>
-                <img src="images/gunung.jpg" class="card-img-top" alt="Post image">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-3">
-                        <div>
-                            <i class="material-icons">favorite_border</i>
-                            <i class="material-icons">chat_bubble_outline</i>
-                            <i class="material-icons">send</i>
-                        </div>
-                        <i class="material-icons">bookmark_border</i>
+
+            <% posts.forEach(p=> { %>
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">
+                            <%= p.User.UserProfile.nama_lengkap %>
+                        </h5>
                     </div>
-                    <p class="card-text"><strong>Pengguna 1</strong> Ini adalah contoh postingan dari pengguna 1.</p>
-                    <input type="text" class="form-control" placeholder="Tambah komentar...">
+                    <% if (p.User.UserProfile.imageUrl) { %>
+                        <img src="images/gunung.jpg" class="card-img-top" alt="Post image">
+                        <% } else { %>
+                            <div class="card-title">
+                                <%= p.title %>
+                            </div>
+                            <% } %>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div>
+                                            <i class="material-icons">favorite_border</i>
+                                            <i class="material-icons">chat_bubble_outline</i>
+                                            <i class="material-icons">send</i>
+                                        </div>
+                                        <i class="material-icons">bookmark_border</i>
+                                    </div>
+                                    <p class="card-text"><strong>
+                                            <%= p.title %>
+                                        </strong>
+                                        <%= p.content %>
+                                    </p>
+                                    <input type="text" class="form-control" placeholder="Tambah komentar...">
+                                </div>
                 </div>
-            </div>
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Pengguna 2</h5>
-                </div>
-                <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Post image">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between mb-3">
-                        <div>
-                            <i class="material-icons">favorite_border</i>
-                            <i class="material-icons">chat_bubble_outline</i>
-                            <i class="material-icons">send</i>
-                        </div>
-                        <i class="material-icons">bookmark_border</i>
-                    </div>
-                    <p class="card-text"><strong>Pengguna 2</strong> Ini adalah contoh postingan dari pengguna 2.</p>
-                    <input type="text" class="form-control" placeholder="Tambah komentar...">
-                </div>
-            </div>
+                <% }) %>
+
+
         </div>
         <!-- Active Users -->
         <div class="col-md-3 d-none d-md-block">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h5 class="mb-0">Pengguna Aktif</h5>
+                    <h5 class="mb-0">Users</h5>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="d-flex align-items-center">
-                            <img src="/images/images.jpeg" class="rounded-circle" alt="User 1" width="40" height="40">
-                            <div class="ms-3">
-                                <p class="mb-0">Pengguna 1</p>
-                                <small class="text-muted">Online</small>
-                                <small class="text-muted">12:01 Hour a goo</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="d-flex align-items-center">
-                            <img src="/images/images.jpeg" class="rounded-circle" alt="User 2" width="40" height="40">
-                            <div class="ms-3">
-                                <p class="mb-0">Pengguna 2</p>
-                                <small class="text-muted">Online</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="d-flex align-items-center">
-                            <img src="/images/images.jpeg" class="rounded-circle" alt="User 3" width="40" height="40">
-                            <div class="ms-3">
-                                <p class="mb-0">Pengguna 3</p>
-                                <small class="text-muted">Online</small>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <% commonityUsers.forEach(u=> { %>
+                    <ul class="list-group list-group-flush">
+                        <% u.Users.forEach(us=> { %>
+                            <li class="list-group-item">
+                                <div class="d-flex align-items-center">
+                                    <img src="/images/images.jpeg" class="rounded-circle" alt="User 1" width="40"
+                                        height="40">
+                                    <div class="ms-3">
+                                        <p class="mb-0">
+                                            <%= us.UserProfile.nama_lengkap %>
+                                        </p>
+                                        <small id="status" class="text-muted">Online</small>
+                                        <small id="jam" class="text-muted">12:01 Hour a goo</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <% }) %>
+
+                    </ul>
+                    <% }) %>
             </div>
         </div>
 
     </div>
     </div>
 
-
-    <!-- Jendela Percakapan -->
-    <div class="chat-button" id="chatButton">
-        <i class="material-icons">chat</i>
-    </div>
-
-    <div class="chat-window" id="chatWindow">
+    <div class="chat-window" id="chatWindow" style="display: none;">
         <div class="chat-header">
             <img src="/images/images.jpeg" class="rounded-circle" alt="User 1" width="40" height="40">
-            <span>yap</span>
+            <span id="name-user"></span>
             <button id="closeChat"><i class="material-icons">close</i></button>
         </div>
 
-        <div class="chat-body">
-            <div class="chat chat-left">
-                <input type="text" value="Ok" readonly class="chat-input chat-input-left">
-                <small>12:11</small>
-                <div class="dropdown">
-                    <button class="dropbtn">...</button>
-                    <div class="dropdown-content">
-                        <a href="#"><i class="material-icons">edit</i></a>
-                        <a href="#"><i class="material-icons">delete</i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="chat chat-right">
-                <input type="text" value="Ok" readonly class="chat-input chat-input-right">
-                <small>12:11</small>
-                <div class="dropdown dropdown-right">
-                    <button class="dropbtn">...</button>
-                    <div class="dropdown-content">
-                        <a href="#"><i class="material-icons">edit</i></a>
-                        <a href="#"><i class="material-icons">delete</i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- chat body -->
+        <div class="chat-body" id="chat-container"></div>
+        <!-- end chat body -->
 
         <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Tulis pesan...">
-            <button id="sendButton"><i class="material-icons">send</i></button>
+            <form id="chat-form">
+                <input type="text" id="chatInput" placeholder="Tulis pesan...">
+                <button type="submit" id="sendButton"><i class="material-icons">send</i></button>
+            </form>
         </div>
     </div>
 
 
-    <script>
-        document.getElementById('chatButton').addEventListener('click', function() {
-            document.getElementById('chatWindow').style.display = 'flex';
-        });
-        
-        document.getElementById('closeChat').addEventListener('click', function() {
-            document.getElementById('chatWindow').style.display = 'none';
-        });
-        
-    </script>
+    <div class="modal fade" id="postinganModal" tabindex="-1" aria-labelledby="postinganModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="postinganModalLabel">Postingan Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/new/post" method="post" id="postingan">
+                    <div class="modal-body custom-modal-body">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul:</label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Konten:</label>
+                            <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="CommunityId" class="form-label">Commonity</label>
+                            <select class="form-select" id="CommunityId" name="CommunityId">
+                                <option selected disabled>Pilih salah satu...</option>
+                                <% hobbi.forEach(h=> { %>
+                                    <option value="<%= h.Community.id %>">
+                                        <%= h.Community.name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer custom-modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <%- include('partial/footHome.ejs') %>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io()
+            const chatWindow = document.getElementById('chatWindow');
+            const chatContainer = document.getElementById('chat-container');
+            const handleClick = async (name) => {
+                socket.emit('joinRoom', name);
+
+                const nameUser = document.getElementById('name-user')
+                nameUser.textContent = name;
+                chatWindow.style.display = 'block';
+
+                const chatForm = document.getElementById('chat-form');
+                const sendButton = document.getElementById('sendButton')
+                const chatInput = document.getElementById('chatInput')
+
+
+                sendButton.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    if (chatInput.value) {
+                        socket.emit('message', name, chatInput.value, socket.id);
+                        const chatElement = document.createElement('div');
+                        chatElement.classList.add('chat');
+
+                        const inputElement = document.createElement('input');
+                        inputElement.setAttribute('type', 'text');
+                        inputElement.setAttribute('value', chatInput.value);
+                        inputElement.setAttribute('readonly', 'readonly');
+                        inputElement.classList.add('chat-input');
+
+                        chatElement.classList.add('chat-right');
+                        inputElement.classList.add('chat-input-right');
+
+                        chatElement.appendChild(inputElement);
+
+                        const timeElement = document.createElement('small');
+                        timeElement.textContent = new Date().toLocaleTimeString();
+                        chatElement.appendChild(timeElement);
+
+                        chatContainer.appendChild(chatElement);
+                        chatInput.value = ''
+                    }
+                });
+
+                socket.on('message', (data) => {
+                    const myMessage = data.clientId === socket.id;
+                    if (!myMessage) {
+                        const chatElement = document.createElement('div');
+                        chatElement.classList.add('chat');
+
+                        const inputElement = document.createElement('input');
+                        inputElement.setAttribute('type', 'text');
+                        inputElement.setAttribute('value', data.msg);
+                        inputElement.setAttribute('readonly', 'readonly');
+                        inputElement.classList.add('chat-input');
+
+                        chatElement.classList.add('chat-left');
+                        inputElement.classList.add('chat-input-left');
+
+                        chatElement.appendChild(inputElement);
+
+                        const timeElement = document.createElement('small');
+                        timeElement.textContent = new Date().toLocaleTimeString();
+                        chatElement.appendChild(timeElement);
+
+                        chatContainer.appendChild(chatElement);
+                    }
+                })
+            }
+
+            const closeChat = document.getElementById('closeChat');
+            closeChat.addEventListener('click', () => {
+                chatWindow.style.display = 'none';
+                // socket.emit('leaveRoom', room);
+            })
+        </script>
+
+        <% if (msg) { %>
+            <script>
+                toastr.success('<%= msg %>');
+            </script>
+            <% } %>
+                <% if (err) { err.split(',').forEach(m=> { %>
+                    <script>
+                        toastr.success('<%= m %>');
+                    </script>
+                    <% })} %>

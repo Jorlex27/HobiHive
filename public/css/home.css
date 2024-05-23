@@ -135,3 +135,7 @@ input[type="text"]:focus {
 .search-input button:hover {
     color: #6F4E37;
 }
+
+.card-title{
+    padding: 10px;
+}

@@ -1,31 +1,26 @@
-const { User, UserProfile, sequelize } = require('./models');
+const { Op } = require('sequelize');
+const { Post, User, UserProfile, Community, CommunityMember } = require('./models');
+const { getCommonityId, getPostMembers, getCommunityUsers } = require('./services/communityService')
 
-const Box = async () => {
-    const transaction = await sequelize.transaction();
-    try {
-        const [user, created] = await User.findOrCreate({
-            where: { GoogleId: '1234' },
-            defaults: {
-                GoogleId: '1234',
-                username: 'ayou',
-                email: 'aw@gmail.com',
-            },
-            transaction
-        });
 
-        if (created) {
-            await UserProfile.create({
-                UserId: user.id,
-                nama_lengkap: user.username
-            }, { transaction });
-        }
+getCommonityId(7)
+    .then((result) => {
+        console.log(result);
+    }).catch((err) => {
+        console.log(err);
+    });
+// getPostMembers(7)
+//     .then((result) => {
+//         console.log(result);
+//     }).catch((err) => {
+//         console.log(err);
+//     });
 
-        await transaction.commit();
-        return user;
-    } catch (error) {
-        await transaction.rollback();
-        return error;
-    }
-};
-
-Box()
+getCommunityUsers(7)
+    .then((result) => {
+        result.forEach((user) => {
+            console.log(user.toJSON());
+        })
+    }).catch((err) => {
+        console.log(err);
+    });

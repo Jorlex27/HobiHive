@@ -13,4 +13,8 @@ const FormatJam = (tanggal) => {
     return hours + " hours " + minutes + " minutes " + "ago";
 }
 
-module.exports = FormatJam
+const FormatTanggal = (tanggal) => {
+    return new Date(tanggal).toLocaleString()
+}
+
+module.exports = {FormatJam, FormatTanggal}

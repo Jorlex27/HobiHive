@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Community.hasMany(models.CommunityMember)
       Community.hasMany(models.Post)
+      Community.belongsToMany(models.User, { through: models.CommunityMember });
+      Community.hasMany(models.ChatMessage);
     }
   }
   Community.init({

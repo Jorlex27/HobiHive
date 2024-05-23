@@ -1,14 +1,37 @@
 'use strict';
 const {
-  Model
+  Model,
+  Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class CommunityMember extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
+    static getCommunity(id){
+      return CommunityMember.findAll({
+        where: {
+          UserId: id
+        },
+        include: {
+          model: sequelize.models.Community,
+          attributes: ['id', 'name']
+        }
+      })
+    }
+
+    static getAllCommunity(id){
+      return CommunityMember.findAll({
+        where: {
+          CommunityId: {
+            [Op.notIn] : id
+          }
+        },
+        include: {
+          model: sequelize.models.Community,
+          attributes: ['id', 'name']
+        }
+      })
+    }
+
     static associate(models) {
       // define association here
       CommunityMember.belongsTo(models.User)
