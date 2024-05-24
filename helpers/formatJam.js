@@ -17,4 +17,19 @@ const FormatTanggal = (tanggal) => {
     return new Date(tanggal).toLocaleString()
 }
 
-module.exports = {FormatJam, FormatTanggal}
+const FormatTanggalIndonesia = (dateString) => {
+    const date = new Date(dateString);
+
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    const dayName = days[date.getUTCDay()];
+    const day = date.getUTCDate();
+    const monthName = months[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+
+    return `${dayName}, ${day} ${monthName} ${year}`;
+}
+
+
+module.exports = {FormatJam, FormatTanggal, FormatTanggalIndonesia}

@@ -26,21 +26,25 @@ const { getCommonityId, getPostMembers, getCommunityUsers } = require('./service
 //     });
 
 const cek = async () => {
-    const like = await Like.findAll({
-        where: {
-            PostId: 13,
-            UserId: 13
-        }
-    })
-    return like
+    try {
+        const userId = 13
+        const postId = 14
+        const content = await Post.findOne({
+            where : {
+                id: postId,
+                UserId: userId
+            },
+            attributes: ['content']
+        })
+        return content
+    } catch (error) {
+        return error
+    }
 }
 
 cek()
     .then((result) => {
-        if (!result.length){
-            console.log('masuk ga');
-        }
-        console.log(result);
+        console.log(result.content);
     }).catch((err) => {
         console.log(err);
     });

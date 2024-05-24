@@ -97,8 +97,10 @@ class AppController {
 
             const { err, msg } = req.query
 
+            const communityIds = await getCommonityId(userId)
+            const allHobbi = await CommunityMember.getAllCommunity(communityIds)
 
-            res.render('pages/profile', { data, formatTanggal, post, err, msg })
+            res.render('pages/profile', { data, formatTanggal, post, allHobbi, err, msg })
         } catch (error) {
             res.send(error)
         }
@@ -185,6 +187,77 @@ class AppController {
             res.redirect('/')
         } catch (error) {
             res.send(error)
+        }
+    }
+
+    static async GetPostComment(req, res) {
+        try {
+            const { postId, userId } = req.params
+            const content = await Post.findOne({
+                where: {
+                    id: postId,
+                    UserId: userId
+                },
+                attributes: ['content']
+            })
+            res.status(200).json(content)
+        } catch (error) {
+            res.status(500).json('arapah')
+        }
+    }
+
+    static async UpdatePostComment(req, res) {
+        try {
+            const { postId, userId } = req.params
+            const { content } = req.body
+            const post = await Post.findOne({
+                where: {
+                    id: postId,
+                    UserId: userId
+                }
+            })
+            post.content = content
+            await post.save()
+
+            res.redirect('/profile')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async DeletePostComment(req, res) {
+        try {
+            const { postId, userId } = req.params
+            await Post.destroy({
+                where: {
+                    id: postId,
+                    UserId: userId
+                }
+            })
+            res.status(200).json('ok')
+        } catch (error) {
+            res.status(500).json('arapah')
+        }
+    }
+
+    static async JoinCommunity(req, res) {
+        try {
+            const userId = req.user.id;
+            const { communityId } = req.params
+            await CommunityMember.findOrCreate({
+                where: {
+                    CommunityId: communityId,
+                    UserId: userId
+                },
+                default: {
+                    CommunityId: communityId,
+                    UserId: userId
+                }
+            })
+            const message = created ? 'Berhasil bergabung dengan komunitas.' : 'Anda sudah menjadi anggota komunitas.';
+            res.status(200).json({ message });
+        } catch (error) {
+            res.status(500).json({ message: 'Terjadi kesalahan saat bergabung dengan komunitas.' });
         }
     }
 }

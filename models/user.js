@@ -1,10 +1,14 @@
 'use strict';
 const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const { FormatTanggalIndonesia } = require('../helpers/formatJam');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
+    get tanggal(){
+      return FormatTanggalIndonesia(this.createdAt)
+    }
 
     static associate(models) {
       User.hasOne(models.UserProfile)
